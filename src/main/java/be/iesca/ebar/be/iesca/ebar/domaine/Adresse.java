@@ -25,32 +25,26 @@ public class Adresse implements Serializable {
         this.commune = commune;
     }
 
-    @Bean
     public String getRueNumero() {
         return rueNumero;
     }
 
-    @Bean
     public void setRueNumero(String rueNumero) {
         this.rueNumero = rueNumero;
     }
 
-    @Bean
     public String getCodePostal() {
         return codePostal;
     }
 
-    @Bean
     public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
     }
 
-    @Bean
     public String getCommune() {
         return commune;
     }
 
-    @Bean
     public void setCommune(String commune) {
         this.commune = commune;
     }

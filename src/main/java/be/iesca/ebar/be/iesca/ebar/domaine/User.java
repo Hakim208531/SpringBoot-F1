@@ -1,5 +1,6 @@
 package be.iesca.ebar.be.iesca.ebar.domaine;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.w3c.dom.stylesheets.LinkStyle;
 
@@ -20,10 +21,11 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String password;
 
-    private Adresse adresse = new Adresse();
+    @Embedded
+    private Adresse adresse;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private CarteCredit carteCredit = new CarteCredit();
+    private CarteCredit carteCredit;
 
     public List<Role> getRoles() {
         return roles;
@@ -67,34 +69,32 @@ public class User implements Serializable {
         return email != null ? email.hashCode() : 0;
     }
 
-    @Bean
     public String getEmail() {
         return email;
     }
 
-    @Bean
     public void setEmail(String email) {
         this.email = email;
     }
 
-    @Bean
     public String getNom() {
         return nom;
     }
 
-    @Bean
     public void setNom(String nom) {
         this.nom = nom;
     }
 
-    @Bean
     public String getPassword() {
         return password;
     }
 
-    @Bean
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public CarteCredit getCarteCredit() {
+        return carteCredit;
     }
 
     public void setCarteCredit(CarteCredit carteCredit) {

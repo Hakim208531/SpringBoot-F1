@@ -33,9 +33,10 @@ public class ConfigJpa1 {
 
 	@Bean
 	public List<User> initialiserLesUsers(UserDao userDao, List<Role> roles, RoleDao roleDao) {
-		List<User> users = new ArrayList<User>(2);
+		List<User> users = new ArrayList<>(2);
 		// admin1
 		User admin = new User("admin1", "admin1@gmail.com", "1234");
+
 		Adresse adresseAdmin = new Adresse("rue de l'admin", "1000", "Bruxelles");
 		admin.setAdresse(adresseAdmin);
 		users.add(admin);

@@ -42,22 +42,18 @@ public class CarteCredit implements Serializable {
         return numero != null ? numero.hashCode() : 0;
     }
 
-    @Bean
     public String getNumero() {
         return numero;
     }
 
-    @Bean
     public void setNumero(String numero) {
         this.numero = numero;
     }
 
-    @Bean
     public String getBanque() {
         return banque;
     }
 
-    @Bean
     public void setBanque(String banque) {
         this.banque = banque;
     }
