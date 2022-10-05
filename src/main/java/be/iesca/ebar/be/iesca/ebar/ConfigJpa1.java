@@ -13,6 +13,8 @@ import be.iesca.ebar.be.iesca.ebar.domaine.Adresse;
 import be.iesca.ebar.be.iesca.ebar.domaine.CarteCredit;
 import be.iesca.ebar.be.iesca.ebar.domaine.Role;
 import be.iesca.ebar.be.iesca.ebar.domaine.User;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class ConfigJpa1 {
@@ -31,11 +33,21 @@ public class ConfigJpa1 {
 		return roles;
 	}
 
+	private User creerUserAvecMdpChiffre(String nom, String email, String password){
+		String mdpChiffre = passwordEncoder().encode(password);
+		return new User(nom, email, mdpChiffre);
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder(){
+		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+	}
+
 	@Bean
 	public List<User> initialiserLesUsers(UserDao userDao, List<Role> roles, RoleDao roleDao) {
 		List<User> users = new ArrayList<>(2);
 		// admin1
-		User admin = new User("admin1", "admin1@gmail.com", "1234");
+		User admin = creerUserAvecMdpChiffre("admin1", "admin1@gmail.com", "1234");
 
 		Adresse adresseAdmin = new Adresse("rue de l'admin", "1000", "Bruxelles");
 		admin.setAdresse(adresseAdmin);
@@ -51,7 +63,7 @@ public class ConfigJpa1 {
 		roleAdministrateur.setUsers(users1);
 		roleAdministrateur=roleDao.save(roleAdministrateur);
 		// membre1
-		User membre = new User("membre1", "membre1@gmail.com", "5678");
+		User membre = creerUserAvecMdpChiffre("membre1", "membre1@gmail.com", "5678");
 		Adresse adresseMembre = new Adresse("rue du membre", "5550", "Membre");
 		membre.setAdresse(adresseMembre);
 		users.add(membre);

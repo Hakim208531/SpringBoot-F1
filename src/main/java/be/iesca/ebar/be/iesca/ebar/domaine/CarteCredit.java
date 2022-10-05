@@ -11,7 +11,7 @@ import java.util.Objects;
 public class CarteCredit implements Serializable {
 
     @OneToOne(mappedBy = "carteCredit")
-    private User user = new User();
+    private User user;
 
     @Id
     private String numero;
